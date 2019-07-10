@@ -1,3 +1,22 @@
+#Software Todo:
+
+#Add UI
+#   button for things like doc_type and makePDF
+
+#Add settings menu:
+#    change things like output path and ui color permanently
+#    Prompt user to permanently save their user information so it doesn't have to be re-entered every time
+
+#Figure out PDF issues
+#    seems to only print pdfs on drive that has word installed (Could be something else)
+
+#Add database for providers
+#    Autocomplete provider information with data in database
+
+
+
+
+
 import os
 import re
 import time
@@ -22,7 +41,7 @@ def DocxtoPDF(inputFileName, outputFileName, formatType = 17):
     if outputFileName[-3:] != 'pdf':
         outputFileName = outputFileName + ".pdf"
     deck = Word.Documents.Open(inputFileName)
-    deck.SaveAs(outputFileName, formatType) # formatType = 32 for ppt to pdf
+    deck.SaveAs(outputFileName, formatType)
     deck.Close()
     Word.Quit()
 
@@ -80,7 +99,7 @@ now = datetime.now()
 today_date = now.strftime('%m/%d/%Y')
 
 #prompt users for input
-doc_type = input('What Type of Document are you making? (RR/LOP/LOR): ')
+doc_type = input('Document Type (RR/LOP/LOR): ')
 client_name = input("Client Name: ")
 doa = input('Date of Accident: ')
 attorney_name= input("Attorney's Name: ")
