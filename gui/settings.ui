@@ -63,28 +63,28 @@
     <item row="0" column="0">
      <widget class="QLabel" name="label_2">
       <property name="text">
-       <string>User Name:</string>
+       <string> User Name:</string>
       </property>
      </widget>
     </item>
     <item row="3" column="0">
      <widget class="QLabel" name="label_5">
       <property name="text">
-       <string>User Fax Number:</string>
+       <string> User Fax Number:</string>
       </property>
      </widget>
     </item>
     <item row="2" column="0">
      <widget class="QLabel" name="label_4">
       <property name="text">
-       <string>User Phone Number:</string>
+       <string> User Phone Number:</string>
       </property>
      </widget>
     </item>
     <item row="1" column="0">
      <widget class="QLabel" name="label_3">
       <property name="text">
-       <string>User Email:</string>
+       <string> User Email:</string>
       </property>
      </widget>
     </item>
@@ -94,7 +94,7 @@
     <item row="4" column="0">
      <widget class="QLabel" name="label_6">
       <property name="text">
-       <string>Output Path:</string>
+       <string> Output Path:</string>
       </property>
      </widget>
     </item>
