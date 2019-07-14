@@ -57,6 +57,34 @@ def replace_string(doc_obj, regex, replace):
 
 provider_int = 0
 
+#define user settings
+
+if os.path.exists("/settings/username.txt"):
+    with open('settings/username.txt', 'r') as user_name_file:
+        user_name = user_name_file.read()
+
+if os.path.exists("/settings/useremail.txt"):
+    with open('settings/useremail.txt', 'r') as user_email_file:
+        user_email = user_email_file.read()
+
+if os.path.exists("/settings/userphone.txt"):
+    with open('settings/userphone.txt', 'r') as user_phone_file:
+        user_phone = user_phone_file.read()
+
+if os.path.exists("/settings/userfax.txt"):
+    with open('settings/userfax.txt', 'r') as user_fax_file:
+        user_fax = user_fax_file.read()
+
+if os.path.exists("/settings/outputpath.txt"):
+    with open('settings/outputpath.txt', 'r') as output_path_file:
+        output_path = output_path_file.read()
+
+
+def retrievesettings(settingsfile):
+    with open(settingsfile, "r") as settingsoutput:
+        settingsoutput.read()
+
+
 #Placeholder values
 
 #LoP and universal
@@ -94,6 +122,10 @@ today_date = now.strftime('%m/%d/%Y')
 
 os.chdir (path+r"\gui")
 
+#Create classes
+
+
+#settings page
 
 class settings(QDialog):
     def __init__(self):
@@ -102,6 +134,8 @@ class settings(QDialog):
         self.pushButton.clicked.connect(self.savesettings)
         self.pushButton_2.clicked.connect(self.movemain)
 
+        if os.path.exists("/settings/username.txt"):
+            self.plainTextEdit.insertPlainText(user_name)
 
     def savesettings(self):
         username = self.plainTextEdit.connect()
@@ -115,6 +149,9 @@ class settings(QDialog):
 
     def movemain(self):
         self.hide()
+
+
+#provider number page
 
 class providerpage(QDialog):
     def __init__(self):
@@ -133,11 +170,15 @@ class providerpage(QDialog):
             self.RRpage.show()
             self.hide()
 
+
+#LOP page
+
 class LOPpage(QDialog):
     def __init__(self):
         super(LOPpage, self).__init__()
         loadUi("LOP.ui", self)
         self.pushButton.clicked.connect(self.create_click)
+        self.pushButton_2.clicked.connect(self.cancel_click)
 
     def create_click(self):
         client_name = self.plainTextEdit.toPlainText()
@@ -145,18 +186,79 @@ class LOPpage(QDialog):
         attorney_name = self.plainTextEdit_3.toPlainText()
         print(client_name + " "  + doa + " " + attorney_name)
 
+    def cancel_click(self):
+        sys.exit()
+
+
+#Reduction request page
+
 class RRpage(QDialog):
     def __init__(self):
         super(RRpage, self).__init__()
         loadUi("RR.ui", self)
+        self.pushButton.clicked.connect(self.create_click)
+        self.pushButton_2.clicked.connect(self.cancel_click)
 
+    def create_click(self):
+        client_name = self.plainTextEdit.toPlainText()
+        doa = self.plainTextEdit_2.toPlainText()
+        attorney_name = self.plainTextEdit_3.toPlainText()
+
+
+    def cancel_click(self):
+        sys.exit()
+
+
+#LOR page
 
 class LORpage(QDialog):
     def __init__(self):
         super(LORpage, self).__init__()
         loadUi("LOR.ui", self)
+        self.pushButton.clicked.connect(self.create_click)
+        self.pushButton_2.clicked.connect(self.cancel_click)
+
+    def create_click(self):
+        client_name = self.plainTextEdit.toPlainText()
+        doa = self.plainTextEdit_2.toPlainText()
+        attorney_name = self.plainTextEdit_3.toPlainText()
+
+        claim_num = self.plainTextEdit_4.toPlainText()
+        def_insurance = self.plainTextEdit_5.toPlainText()
+        def_adjuster_name = self.plainTextEdit_6.toPlainText()
+        def_adjuster_address = self.plainTextEdit_7.toPlainText()
+        def_adjuster_csz = self.plainTextEdit_8.toPlainText()
+        def_adjuster_fax = self.plainTextEdit_9.toPlainText()
+
+        doc = Document(lor_pl)
+
+        if not os.path.exists('/DocuLegal/LORs/Word'):
+            os.makedirs('/DocuLegal/LORs/Word')
+
+        if not os.path.exists('/DocuLegal/LORs/PDF'):
+            os.makedirs('/DocuLegal/LORs/PDF')
+
+        replace_string(doc, client_name_PL, client_name)
+        replace_string(doc, def_insurance_pl, def_insurance)
+        replace_string(doc, claim_num_pl, claim_num)
+        replace_string(doc, def_adjuster_name_pl, def_adjuster_name)
+        replace_string(doc, def_adjuster_address_pl, def_adjuster_address)
+        replace_string(doc, def_adjuster_csz_pl, def_adjuster_csz)
+        replace_string(doc, def_adjuster_fax_pl, def_adjuster_fax)
+        replace_string(doc, user_name_pl, user_name)
+        replace_string(doc, user_number_pl, user_phone)
+        replace_string(doc, attorney_name_PL, attorney_name)
+        replace_string(doc, def_adjuster_name_pl, def_adjuster_name)
 
 
+        doc.save('/DocuLegal/LORs/Word/' + client_name.upper() + ' LOR ' + def_insurance.upper() + ".docx")
+
+
+    def cancel_click(self):
+        sys.exit()
+
+
+#Main page
 
 class mainpage(QDialog):
     def __init__(self):
@@ -191,7 +293,6 @@ class mainpage(QDialog):
         self.hide()
         global doc_type
         doc_type = "RR"
-
 
 
 app = QApplication(sys.argv)
