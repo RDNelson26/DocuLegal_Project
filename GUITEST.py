@@ -12,6 +12,10 @@ from PyQt5.uic import loadUi
 
 
 
+global client_name
+global doa
+global attorney_name
+
 #Path to files
 
 path = os.getcwd()
@@ -133,6 +137,13 @@ class LOPpage(QDialog):
     def __init__(self):
         super(LOPpage, self).__init__()
         loadUi("LOP.ui", self)
+        self.pushButton.clicked.connect(self.create_click)
+
+    def create_click(self):
+        client_name = self.plainTextEdit.toPlainText()
+        doa = self.plainTextEdit_2.toPlainText()
+        attorney_name = self.plainTextEdit_3.toPlainText()
+        print(client_name + " "  + doa + " " + attorney_name)
 
 class RRpage(QDialog):
     def __init__(self):
