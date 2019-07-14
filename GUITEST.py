@@ -88,7 +88,7 @@ requested_balance_pl = re.compile("Requested Balance")
 now = datetime.now()
 today_date = now.strftime('%m/%d/%Y')
 
-os.chdir (r"\Users\Ryan\PycharmProjects\untitled3\gui")
+os.chdir (path+r"\gui")
 
 
 class settings(QDialog):
