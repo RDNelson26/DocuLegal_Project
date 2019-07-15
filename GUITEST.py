@@ -65,24 +65,24 @@ provider_int = 0
 
 #define user settings
 
-if os.path.exists(path + "/settings/username.txt"):
-    with open(path + '/settings/username.txt', 'r') as user_name_file:
+if os.path.exists(path + "/user_name.txt"):
+    with open(path + '/user_name.txt', 'r') as user_name_file:
         user_name = user_name_file.read()
 
-if os.path.exists(path + "/settings/useremail.txt"):
-    with open(path + '/settings/useremail.txt', 'r') as user_email_file:
+if os.path.exists(path + "/user_email.txt"):
+    with open(path + '/user_email.txt', 'r') as user_email_file:
         user_email = user_email_file.read()
 
-if os.path.exists(path + "/settings/userphone.txt"):
-    with open(path + '/settings/userphone.txt', 'r') as user_phone_file:
+if os.path.exists(path + "/user_phone.txt"):
+    with open(path + '/user_phone.txt', 'r') as user_phone_file:
         user_phone = user_phone_file.read()
 
-if os.path.exists(path + "/settings/userfax.txt"):
-    with open(path + '/settings/userfax.txt', 'r') as user_fax_file:
+if os.path.exists(path + "/user_fax.txt"):
+    with open(path + '/user_fax.txt', 'r') as user_fax_file:
         user_fax = user_fax_file.read()
 
-if os.path.exists(path + "/settings/outputpath.txt"):
-    with open(path + '/settings/outputpath.txt', 'r') as output_path_file:
+if os.path.exists(path + "/output_path.txt"):
+    with open(path + '/output_path.txt', 'r') as output_path_file:
         output_path = output_path_file.read()
 
 
@@ -141,25 +141,25 @@ class settings(QDialog):
         self.pushButton_2.clicked.connect(self.movemain)
 
 
-        if os.path.exists(path + "/settings/username.txt"):
+        if os.path.exists(path + "/user_name.txt"):
             self.plainTextEdit.insertPlainText(user_name)
 
-        if os.path.exists(path + "/settings/useremail.txt"):
+        if os.path.exists(path + "/user_email.txt"):
             self.plainTextEdit.insertPlainText(user_email)
 
-        if os.path.exists(path + "/settings/userphone.txt"):
+        if os.path.exists(path + "/user_phone.txt"):
             self.plainTextEdit.insertPlainText(user_phone)
 
-        if os.path.exists(path + "/settings/userfax.txt"):
+        if os.path.exists(path + "/user_fax.txt"):
             self.plainTextEdit.insertPlainText(user_fax)
 
-        if os.path.exists(path + "/settings/outputpath.txt"):
+        if os.path.exists(path + "/output_path.txt"):
             self.plainTextEdit.insertPlainText(output_path)
 
     def savesettings(self):
 
         user_name = self.plainTextEdit.toPlainText()
-        self.plainTextEdit.connect(self.writesettings("user_name", user_name))
+        self.writesettings("user_name", user_name)
 
     def writesettings(self, settingname, settingstr):
         with open(settingname + ".txt", "w") as settingfile:
