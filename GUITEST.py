@@ -25,10 +25,12 @@ global output_path
 #Path to files
 
 path = os.getcwd()
+settings_path = (path + "/settings")
 lop_pl = (path + "\placeholders\LoP.docx")
 rr_pl = (path + "\placeholders\RR.docx")
 lor_pl = (path + "\placeholders\LoR.docx")
 
+os.chdir (path+r"\gui")
 
 
 #define replace_string , docxtopdf, and set values
@@ -65,24 +67,24 @@ provider_int = 0
 
 #define user settings
 
-if os.path.exists(path + "/user_name.txt"):
-    with open(path + '/user_name.txt', 'r') as user_name_file:
+if os.path.exists(settings_path + "/user_name.txt"):
+    with open(settings_path + '/user_name.txt', 'r') as user_name_file:
         user_name = user_name_file.read()
 
-if os.path.exists(path + "/user_email.txt"):
-    with open(path + '/user_email.txt', 'r') as user_email_file:
+if os.path.exists(settings_path + "/user_email.txt"):
+    with open(settings_path + '/user_email.txt', 'r') as user_email_file:
         user_email = user_email_file.read()
 
-if os.path.exists(path + "/user_phone.txt"):
-    with open(path + '/user_phone.txt', 'r') as user_phone_file:
+if os.path.exists(settings_path + "/user_phone.txt"):
+    with open(settings_path + '/user_phone.txt', 'r') as user_phone_file:
         user_phone = user_phone_file.read()
 
-if os.path.exists(path + "/user_fax.txt"):
-    with open(path + '/user_fax.txt', 'r') as user_fax_file:
+if os.path.exists(settings_path + "/user_fax.txt"):
+    with open(settings_path + '/user_fax.txt', 'r') as user_fax_file:
         user_fax = user_fax_file.read()
 
-if os.path.exists(path + "/output_path.txt"):
-    with open(path + '/output_path.txt', 'r') as output_path_file:
+if os.path.exists("/output_path.txt"):
+    with open('/output_path.txt', 'r') as output_path_file:
         output_path = output_path_file.read()
 
 
@@ -126,7 +128,6 @@ requested_balance_pl = re.compile("Requested Balance")
 now = datetime.now()
 today_date = now.strftime('%m/%d/%Y')
 
-os.chdir (path+r"\gui")
 
 #Create classes
 
@@ -141,19 +142,19 @@ class settings(QDialog):
         self.pushButton_2.clicked.connect(self.movemain)
 
 
-        if os.path.exists(path + "/user_name.txt"):
+        if os.path.exists(settings_path + "/user_name.txt"):
             self.plainTextEdit.insertPlainText(user_name)
 
-        if os.path.exists(path + "/user_email.txt"):
+        if os.path.exists(settings_path + "/user_email.txt"):
             self.plainTextEdit.insertPlainText(user_email)
 
-        if os.path.exists(path + "/user_phone.txt"):
+        if os.path.exists(settings_path + "/user_phone.txt"):
             self.plainTextEdit.insertPlainText(user_phone)
 
-        if os.path.exists(path + "/user_fax.txt"):
+        if os.path.exists(settings_path + "/user_fax.txt"):
             self.plainTextEdit.insertPlainText(user_fax)
 
-        if os.path.exists(path + "/output_path.txt"):
+        if os.path.exists(settings_path + "/output_path.txt"):
             self.plainTextEdit.insertPlainText(output_path)
 
     def savesettings(self):
@@ -162,9 +163,9 @@ class settings(QDialog):
         self.writesettings("user_name", user_name)
 
     def writesettings(self, settingname, settingstr):
-        with open(settingname + ".txt", "w") as settingfile:
+        with open(settings_path + "/" + settingname + ".txt", "w") as settingfile:
             settingfile.write(settingstr)
-        print("settingswritten")
+
 
 
 
