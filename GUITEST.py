@@ -15,6 +15,12 @@ from PyQt5.uic import loadUi
 global client_name
 global doa
 global attorney_name
+global user_name
+global user_email
+global user_fax
+global user_phone
+global output_path
+
 
 #Path to files
 
@@ -59,24 +65,24 @@ provider_int = 0
 
 #define user settings
 
-if os.path.exists("/settings/username.txt"):
-    with open('settings/username.txt', 'r') as user_name_file:
+if os.path.exists(path + "/settings/username.txt"):
+    with open(path + '/settings/username.txt', 'r') as user_name_file:
         user_name = user_name_file.read()
 
-if os.path.exists("/settings/useremail.txt"):
-    with open('settings/useremail.txt', 'r') as user_email_file:
+if os.path.exists(path + "/settings/useremail.txt"):
+    with open(path + '/settings/useremail.txt', 'r') as user_email_file:
         user_email = user_email_file.read()
 
-if os.path.exists("/settings/userphone.txt"):
-    with open('settings/userphone.txt', 'r') as user_phone_file:
+if os.path.exists(path + "/settings/userphone.txt"):
+    with open(path + '/settings/userphone.txt', 'r') as user_phone_file:
         user_phone = user_phone_file.read()
 
-if os.path.exists("/settings/userfax.txt"):
-    with open('settings/userfax.txt', 'r') as user_fax_file:
+if os.path.exists(path + "/settings/userfax.txt"):
+    with open(path + '/settings/userfax.txt', 'r') as user_fax_file:
         user_fax = user_fax_file.read()
 
-if os.path.exists("/settings/outputpath.txt"):
-    with open('settings/outputpath.txt', 'r') as output_path_file:
+if os.path.exists(path + "/settings/outputpath.txt"):
+    with open(path + '/settings/outputpath.txt', 'r') as output_path_file:
         output_path = output_path_file.read()
 
 
@@ -134,18 +140,33 @@ class settings(QDialog):
         self.pushButton.clicked.connect(self.savesettings)
         self.pushButton_2.clicked.connect(self.movemain)
 
-        if os.path.exists("/settings/username.txt"):
+
+        if os.path.exists(path + "/settings/username.txt"):
             self.plainTextEdit.insertPlainText(user_name)
 
-    def savesettings(self):
-        username = self.plainTextEdit.connect()
-        useremail = self.plainTextEdit_2.connect()
-        userphone = self.plainTextEdit_3.connect()
-        userfax = self.plainTextEdit_4.connect()
-        outputpath = self.plainTextEdit_5.connect()
+        if os.path.exists(path + "/settings/useremail.txt"):
+            self.plainTextEdit.insertPlainText(user_email)
 
-        print("saved")
-        self.hide()
+        if os.path.exists(path + "/settings/userphone.txt"):
+            self.plainTextEdit.insertPlainText(user_phone)
+
+        if os.path.exists(path + "/settings/userfax.txt"):
+            self.plainTextEdit.insertPlainText(user_fax)
+
+        if os.path.exists(path + "/settings/outputpath.txt"):
+            self.plainTextEdit.insertPlainText(output_path)
+
+    def savesettings(self):
+
+        user_name = self.plainTextEdit.toPlainText()
+        self.plainTextEdit.connect(self.writesettings("user_name", user_name))
+
+    def writesettings(self, settingname, settingstr):
+        with open(settingname + ".txt", "w") as settingfile:
+            settingfile.write(settingstr)
+        print("settingswritten")
+
+
 
     def movemain(self):
         self.hide()
