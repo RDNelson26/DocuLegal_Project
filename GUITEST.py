@@ -21,6 +21,10 @@ global user_fax
 global user_phone
 global output_path
 global widget
+global lor_pl
+global lop_pl
+global rr_pl
+
 
 #Path to files
 
@@ -273,11 +277,11 @@ class LORpage(QDialog):
 
         doc = Document(lor_pl)
 
-        if not os.path.exists('/DocuLegal/LORs/Word'):
-            os.makedirs('/DocuLegal/LORs/Word')
+        if not os.path.exists(path + '/DocuLegal/LORs/Word'):
+            os.makedirs(path + '/DocuLegal/LORs/Word')
 
-        if not os.path.exists('/DocuLegal/LORs/PDF'):
-            os.makedirs('/DocuLegal/LORs/PDF')
+        if not os.path.exists(path + '/DocuLegal/LORs/PDF'):
+            os.makedirs(path + '/DocuLegal/LORs/PDF')
 
         replace_string(doc, client_name_PL, client_name)
         replace_string(doc, def_insurance_pl, def_insurance)
