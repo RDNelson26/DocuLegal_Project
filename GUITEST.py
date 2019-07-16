@@ -20,7 +20,7 @@ global user_email
 global user_fax
 global user_phone
 global output_path
-
+global widget
 
 #Path to files
 
@@ -62,6 +62,16 @@ def replace_string(doc_obj, regex, replace):
             for cell in row.cells:
                 replace_string(cell, regex, replace)
 
+def tabFocus(self):
+    self.plainTextEdit.setTabChangesFocus(True)
+    self.plainTextEdit_2.setTabChangesFocus(True)
+    self.plainTextEdit_3.setTabChangesFocus(True)
+    self.plainTextEdit_4.setTabChangesFocus(True)
+    self.plainTextEdit_5.setTabChangesFocus(True)
+    self.setTabOrder(self.plainTextEdit, self.plainTextEdit_2)
+    self.setTabOrder(self.plainTextEdit_2, self.plainTextEdit_3)
+    self.setTabOrder(self.plainTextEdit_3, self.plainTextEdit_4)
+    self.setTabOrder(self.plainTextEdit_4, self.plainTextEdit_5)
 
 provider_int = 0
 
@@ -140,27 +150,37 @@ class settings(QDialog):
         loadUi("settings.ui", self)
         self.pushButton.clicked.connect(self.savesettings)
         self.pushButton_2.clicked.connect(self.movemain)
-
+        tabFocus(self)
 
         if os.path.exists(settings_path + "/user_name.txt"):
             self.plainTextEdit.insertPlainText(user_name)
 
         if os.path.exists(settings_path + "/user_email.txt"):
-            self.plainTextEdit.insertPlainText(user_email)
+            self.plainTextEdit_2.insertPlainText(user_email)
 
         if os.path.exists(settings_path + "/user_phone.txt"):
-            self.plainTextEdit.insertPlainText(user_phone)
+            self.plainTextEdit_3.insertPlainText(user_phone)
 
         if os.path.exists(settings_path + "/user_fax.txt"):
-            self.plainTextEdit.insertPlainText(user_fax)
+            self.plainTextEdit_4.insertPlainText(user_fax)
 
         if os.path.exists(settings_path + "/output_path.txt"):
-            self.plainTextEdit.insertPlainText(output_path)
+            self.plainTextEdit_5.insertPlainText(output_path)
 
     def savesettings(self):
 
         user_name = self.plainTextEdit.toPlainText()
         self.writesettings("user_name", user_name)
+
+        user_email = self.plainTextEdit_2.toPlainText()
+        self.writesettings("user_email", user_email)
+
+        user_phone = self.plainTextEdit_3.toPlainText()
+        self.writesettings("user_phone", user_phone)
+
+        user_fax = self.plainTextEdit_4.toPlainText()
+        self.writesettings("user_fax", user_fax)
+
 
     def writesettings(self, settingname, settingstr):
         with open(settings_path + "/" + settingname + ".txt", "w") as settingfile:
@@ -170,8 +190,7 @@ class settings(QDialog):
 
 
     def movemain(self):
-        self.hide()
-
+        sys.exit()
 
 #provider number page
 
@@ -283,6 +302,7 @@ class LORpage(QDialog):
 #Main page
 
 class mainpage(QDialog):
+
     def __init__(self):
         super(mainpage, self).__init__()
         loadUi('mainpage.ui', self)
@@ -294,9 +314,9 @@ class mainpage(QDialog):
         self.providerpage = providerpage()
         self.LORpage = LORpage()
 
+
     def movesettings(self):
         self.settings.show()
-
 
     def moveLOR(self):
         self.LORpage.show()
@@ -316,9 +336,15 @@ class mainpage(QDialog):
         global doc_type
         doc_type = "RR"
 
+if os.path.exists(settings_path + "/user_name.txt") and os.path.exists(settings_path + "/user_email.txt") and os.path.exists(settings_path + "/user_phone.txt") and os.path.exists(settings_path + "/user_email.txt"):
+    app = QApplication(sys.argv)
+    global widget
+    widget = mainpage()
+    widget.show()
+    sys.exit(app.exec_())
 
-app = QApplication(sys.argv)
-widget = mainpage()
-widget.show()
-sys.exit(app.exec_())
-
+else:
+    app = QApplication(sys.argv)
+    widget = settings()
+    widget.show()
+    sys.exit(app.exec())
