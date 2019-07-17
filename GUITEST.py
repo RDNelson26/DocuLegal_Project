@@ -24,7 +24,7 @@ global widget
 global lor_pl
 global lop_pl
 global rr_pl
-
+global doc
 
 #Path to files
 
@@ -194,7 +194,7 @@ class settings(QDialog):
 
 
     def movemain(self):
-        sys.exit()
+        self.close()
 
 #provider number page
 
