@@ -139,7 +139,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Exit</string>
+    <string>Close</string>
    </property>
   </widget>
   <widget class="QGraphicsView" name="graphicsView">

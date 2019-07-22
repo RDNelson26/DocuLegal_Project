@@ -267,7 +267,6 @@ class LORpage(QDialog):
         client_name = self.plainTextEdit.toPlainText()
         doa = self.plainTextEdit_2.toPlainText()
         attorney_name = self.plainTextEdit_3.toPlainText()
-
         claim_num = self.plainTextEdit_4.toPlainText()
         def_insurance = self.plainTextEdit_5.toPlainText()
         def_adjuster_name = self.plainTextEdit_6.toPlainText()
@@ -276,12 +275,11 @@ class LORpage(QDialog):
         def_adjuster_fax = self.plainTextEdit_9.toPlainText()
 
         doc = Document(lor_pl)
+        if not os.path.exists('C:/DocuLegal/LORs/Word'):
+            os.makedirs('C:/DocuLegal/LORs/Word')
 
-        if not os.path.exists(path + '/DocuLegal/LORs/Word'):
-            os.makedirs(path + '/DocuLegal/LORs/Word')
-
-        if not os.path.exists(path + '/DocuLegal/LORs/PDF'):
-            os.makedirs(path + '/DocuLegal/LORs/PDF')
+        if not os.path.exists('C:/DocuLegal/LORs/PDF'):
+            os.makedirs('C:/DocuLegal/LORs/PDF')
 
         replace_string(doc, client_name_PL, client_name)
         replace_string(doc, def_insurance_pl, def_insurance)
@@ -294,10 +292,15 @@ class LORpage(QDialog):
         replace_string(doc, user_number_pl, user_phone)
         replace_string(doc, attorney_name_PL, attorney_name)
         replace_string(doc, def_adjuster_name_pl, def_adjuster_name)
+        replace_string(doc, today_date_PL, today_date)
 
 
-        doc.save('/DocuLegal/LORs/Word/' + client_name.upper() + ' LOR ' + def_insurance.upper() + ".docx")
+        doc.save('C:/DocuLegal/LORs/Word/' + client_name.upper() + ' LOR ' + def_insurance.upper() + ".docx")
 
+        if str(self.comboBox.currentText()) == "Docx and PDF":
+
+            DocxtoPDF('C:/DocuLegal/LORs/Word/' + client_name.upper() + ' LOR ' + def_insurance.upper() + ".docx",
+                      'C:/DocuLegal/LORs/PDF/' + client_name.upper() + ' LOR ' + def_insurance.upper() + ".pdf")
 
     def cancel_click(self):
         sys.exit()
