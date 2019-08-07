@@ -63,17 +63,10 @@
      <x>10</x>
      <y>10</y>
      <width>381</width>
-     <height>271</height>
+     <height>231</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="3" column="0">
-     <widget class="QLabel" name="label_3">
-      <property name="text">
-       <string>Attorney's Name</string>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="1">
      <widget class="QPlainTextEdit" name="plainTextEdit"/>
     </item>
@@ -84,11 +77,18 @@
       </property>
      </widget>
     </item>
-    <item row="5" column="1">
-     <widget class="QPlainTextEdit" name="plainTextEdit_5"/>
+    <item row="3" column="0">
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>Attorney's Name</string>
+      </property>
+     </widget>
     </item>
     <item row="4" column="1">
      <widget class="QPlainTextEdit" name="plainTextEdit_4"/>
+    </item>
+    <item row="5" column="1">
+     <widget class="QPlainTextEdit" name="plainTextEdit_5"/>
     </item>
     <item row="4" column="0">
      <widget class="QLabel" name="label_4">
@@ -97,8 +97,8 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="1">
-     <widget class="QPlainTextEdit" name="plainTextEdit_2"/>
+    <item row="3" column="1">
+     <widget class="QPlainTextEdit" name="plainTextEdit_3"/>
     </item>
     <item row="1" column="0" rowspan="2">
      <widget class="QLabel" name="label_2">
@@ -106,9 +106,6 @@
        <string>Date of Accident</string>
       </property>
      </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QPlainTextEdit" name="plainTextEdit_3"/>
     </item>
     <item row="7" column="1">
      <widget class="QPlainTextEdit" name="plainTextEdit_7"/>
@@ -136,6 +133,16 @@
        <string>Provider's Address</string>
       </property>
      </widget>
+    </item>
+    <item row="8" column="1">
+     <widget class="QLabel" name="label_9">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QPlainTextEdit" name="plainTextEdit_2"/>
     </item>
    </layout>
   </widget>

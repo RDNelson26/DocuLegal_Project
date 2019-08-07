@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>750</width>
-    <height>301</height>
+    <height>300</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -35,10 +35,73 @@
      <x>10</x>
      <y>10</y>
      <width>381</width>
-     <height>271</height>
+     <height>261</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
+    <item row="7" column="1">
+     <widget class="QPlainTextEdit" name="plainTextEdit_7"/>
+    </item>
+    <item row="6" column="1">
+     <widget class="QPlainTextEdit" name="plainTextEdit_6"/>
+    </item>
+    <item row="4" column="1">
+     <widget class="QPlainTextEdit" name="plainTextEdit_4"/>
+    </item>
+    <item row="8" column="1">
+     <widget class="QPlainTextEdit" name="plainTextEdit_8"/>
+    </item>
+    <item row="5" column="1">
+     <widget class="QPlainTextEdit" name="plainTextEdit_5"/>
+    </item>
+    <item row="0" column="1">
+     <widget class="QPlainTextEdit" name="plainTextEdit"/>
+    </item>
+    <item row="4" column="0">
+     <widget class="QLabel" name="label_5">
+      <property name="text">
+       <string>Provider's Name</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>Attorney's Name</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" rowspan="2">
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>Date of Accident</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="0">
+     <widget class="QLabel" name="label_9">
+      <property name="text">
+       <string>Requested Balance</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QPlainTextEdit" name="plainTextEdit_2"/>
+    </item>
+    <item row="5" column="0">
+     <widget class="QLabel" name="label_6">
+      <property name="text">
+       <string>Provider's Email/Fax</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Client's Name</string>
+      </property>
+     </widget>
+    </item>
     <item row="6" column="0">
      <widget class="QLabel" name="label_7">
       <property name="text">
@@ -53,71 +116,15 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>Client's Name</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0">
-     <widget class="QLabel" name="label_6">
-      <property name="text">
-       <string>Provider's Email/Fax</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="1">
-     <widget class="QPlainTextEdit" name="plainTextEdit_7"/>
-    </item>
-    <item row="5" column="1">
-     <widget class="QPlainTextEdit" name="plainTextEdit_6"/>
-    </item>
     <item row="3" column="1">
      <widget class="QPlainTextEdit" name="plainTextEdit_3"/>
     </item>
-    <item row="0" column="1">
-     <widget class="QPlainTextEdit" name="plainTextEdit"/>
-    </item>
-    <item row="3" column="0">
-     <widget class="QLabel" name="label_3">
+    <item row="9" column="1">
+     <widget class="QLabel" name="label_11">
       <property name="text">
-       <string>Attorney's Name</string>
+       <string/>
       </property>
      </widget>
-    </item>
-    <item row="4" column="0">
-     <widget class="QLabel" name="label_5">
-      <property name="text">
-       <string>Provider's Name</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="1">
-     <widget class="QPlainTextEdit" name="plainTextEdit_5"/>
-    </item>
-    <item row="1" column="0" rowspan="2">
-     <widget class="QLabel" name="label_2">
-      <property name="text">
-       <string>Date of Accident</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QPlainTextEdit" name="plainTextEdit_2"/>
-    </item>
-    <item row="8" column="0">
-     <widget class="QLabel" name="label_9">
-      <property name="text">
-       <string>Requested Balance</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="1">
-     <widget class="QPlainTextEdit" name="plainTextEdit_4"/>
-    </item>
-    <item row="8" column="1">
-     <widget class="QPlainTextEdit" name="plainTextEdit_8"/>
     </item>
    </layout>
   </widget>

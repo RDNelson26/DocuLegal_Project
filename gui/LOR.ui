@@ -25,21 +25,28 @@
      <x>10</x>
      <y>10</y>
      <width>381</width>
-     <height>271</height>
+     <height>291</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="4" column="1">
      <widget class="QPlainTextEdit" name="plainTextEdit_4"/>
     </item>
-    <item row="7" column="1">
-     <widget class="QPlainTextEdit" name="plainTextEdit_7"/>
-    </item>
     <item row="6" column="1">
      <widget class="QPlainTextEdit" name="plainTextEdit_6"/>
     </item>
+    <item row="7" column="1">
+     <widget class="QPlainTextEdit" name="plainTextEdit_7"/>
+    </item>
     <item row="5" column="1">
      <widget class="QPlainTextEdit" name="plainTextEdit_5"/>
+    </item>
+    <item row="5" column="0">
+     <widget class="QLabel" name="label_5">
+      <property name="text">
+       <string>Defendant Insurance Company</string>
+      </property>
+     </widget>
     </item>
     <item row="9" column="0">
      <widget class="QLabel" name="label_9">
@@ -51,13 +58,6 @@
     <item row="0" column="1">
      <widget class="QPlainTextEdit" name="plainTextEdit"/>
     </item>
-    <item row="5" column="0">
-     <widget class="QLabel" name="label_5">
-      <property name="text">
-       <string>Defendant Insurance Company</string>
-      </property>
-     </widget>
-    </item>
     <item row="3" column="0">
      <widget class="QLabel" name="label_3">
       <property name="text">
@@ -68,17 +68,17 @@
     <item row="3" column="1">
      <widget class="QPlainTextEdit" name="plainTextEdit_3"/>
     </item>
-    <item row="7" column="0">
-     <widget class="QLabel" name="label_7">
-      <property name="text">
-       <string>Adjuster's Address</string>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="0">
      <widget class="QLabel" name="label">
       <property name="text">
        <string>Client's Name</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0">
+     <widget class="QLabel" name="label_7">
+      <property name="text">
+       <string>Adjuster's Address</string>
       </property>
      </widget>
     </item>
@@ -88,6 +88,9 @@
        <string>Adjuster's City, State, Zip</string>
       </property>
      </widget>
+    </item>
+    <item row="8" column="1">
+     <widget class="QPlainTextEdit" name="plainTextEdit_8"/>
     </item>
     <item row="6" column="0">
      <widget class="QLabel" name="label_6">
@@ -103,11 +106,11 @@
       </property>
      </widget>
     </item>
-    <item row="8" column="1">
-     <widget class="QPlainTextEdit" name="plainTextEdit_8"/>
-    </item>
     <item row="9" column="1">
      <widget class="QPlainTextEdit" name="plainTextEdit_9"/>
+    </item>
+    <item row="1" column="1">
+     <widget class="QPlainTextEdit" name="plainTextEdit_2"/>
     </item>
     <item row="1" column="0" rowspan="2">
      <widget class="QLabel" name="label_2">
@@ -116,8 +119,12 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="1">
-     <widget class="QPlainTextEdit" name="plainTextEdit_2"/>
+    <item row="10" column="1">
+     <widget class="QLabel" name="label_11">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -177,11 +184,6 @@
       <item>
        <property name="text">
         <string>Only Docx</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Only PDF</string>
        </property>
       </item>
      </widget>

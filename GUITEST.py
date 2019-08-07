@@ -38,6 +38,12 @@ os.chdir (path+r"\gui")
 
 
 #define replace_string , docxtopdf, and set values
+def DocxtoPDF2(in_file, out_file):
+    word = comtypes.client.CreateObject('Word.Application')
+    d = word.Documents.Open(in_file)
+    d.SaveAs(out_file, FileFormat=17)
+    d.Close()
+    word.Quit()
 
 def DocxtoPDF(inputFileName, outputFileName, formatType = 17):
     Word = comtypes.client.CreateObject("Word.Application")
@@ -224,6 +230,20 @@ class LOPpage(QDialog):
         loadUi("LOP.ui", self)
         self.pushButton.clicked.connect(self.create_click)
         self.pushButton_2.clicked.connect(self.cancel_click)
+        self.plainTextEdit.setTabChangesFocus(True)
+        self.plainTextEdit_2.setTabChangesFocus(True)
+        self.plainTextEdit_3.setTabChangesFocus(True)
+        self.plainTextEdit_4.setTabChangesFocus(True)
+        self.plainTextEdit_5.setTabChangesFocus(True)
+        self.plainTextEdit_6.setTabChangesFocus(True)
+        self.plainTextEdit_7.setTabChangesFocus(True)
+
+        self.setTabOrder(self.plainTextEdit, self.plainTextEdit_2)
+        self.setTabOrder(self.plainTextEdit_2, self.plainTextEdit_3)
+        self.setTabOrder(self.plainTextEdit_3, self.plainTextEdit_4)
+        self.setTabOrder(self.plainTextEdit_4, self.plainTextEdit_5)
+        self.setTabOrder(self.plainTextEdit_5, self.plainTextEdit_6)
+        self.setTabOrder(self.plainTextEdit_6, self.plainTextEdit_7)
 
     def create_click(self):
         client_name = self.plainTextEdit.toPlainText()
@@ -243,6 +263,22 @@ class RRpage(QDialog):
         loadUi("RR.ui", self)
         self.pushButton.clicked.connect(self.create_click)
         self.pushButton_2.clicked.connect(self.cancel_click)
+        self.plainTextEdit.setTabChangesFocus(True)
+        self.plainTextEdit_2.setTabChangesFocus(True)
+        self.plainTextEdit_3.setTabChangesFocus(True)
+        self.plainTextEdit_4.setTabChangesFocus(True)
+        self.plainTextEdit_5.setTabChangesFocus(True)
+        self.plainTextEdit_6.setTabChangesFocus(True)
+        self.plainTextEdit_7.setTabChangesFocus(True)
+        self.plainTextEdit_8.setTabChangesFocus(True)
+
+        self.setTabOrder(self.plainTextEdit, self.plainTextEdit_2)
+        self.setTabOrder(self.plainTextEdit_2, self.plainTextEdit_3)
+        self.setTabOrder(self.plainTextEdit_3, self.plainTextEdit_4)
+        self.setTabOrder(self.plainTextEdit_4, self.plainTextEdit_5)
+        self.setTabOrder(self.plainTextEdit_5, self.plainTextEdit_6)
+        self.setTabOrder(self.plainTextEdit_6, self.plainTextEdit_7)
+        self.setTabOrder(self.plainTextEdit_7, self.plainTextEdit_8)
 
     def create_click(self):
         client_name = self.plainTextEdit.toPlainText()
@@ -262,6 +298,23 @@ class LORpage(QDialog):
         loadUi("LOR.ui", self)
         self.pushButton.clicked.connect(self.create_click)
         self.pushButton_2.clicked.connect(self.cancel_click)
+        self.plainTextEdit.setTabChangesFocus(True)
+        self.plainTextEdit_2.setTabChangesFocus(True)
+        self.plainTextEdit_3.setTabChangesFocus(True)
+        self.plainTextEdit_4.setTabChangesFocus(True)
+        self.plainTextEdit_5.setTabChangesFocus(True)
+        self.plainTextEdit_6.setTabChangesFocus(True)
+        self.plainTextEdit_7.setTabChangesFocus(True)
+        self.plainTextEdit_8.setTabChangesFocus(True)
+        self.plainTextEdit_9.setTabChangesFocus(True)
+        self.setTabOrder(self.plainTextEdit, self.plainTextEdit_2)
+        self.setTabOrder(self.plainTextEdit_2, self.plainTextEdit_3)
+        self.setTabOrder(self.plainTextEdit_3, self.plainTextEdit_4)
+        self.setTabOrder(self.plainTextEdit_4, self.plainTextEdit_5)
+        self.setTabOrder(self.plainTextEdit_5, self.plainTextEdit_6)
+        self.setTabOrder(self.plainTextEdit_6, self.plainTextEdit_7)
+        self.setTabOrder(self.plainTextEdit_7, self.plainTextEdit_8)
+        self.setTabOrder(self.plainTextEdit_8, self.plainTextEdit_9)
 
     def create_click(self):
         client_name = self.plainTextEdit.toPlainText()
@@ -299,7 +352,7 @@ class LORpage(QDialog):
 
         if str(self.comboBox.currentText()) == "Docx and PDF":
 
-            DocxtoPDF('C:/DocuLegal/LORs/Word/' + client_name.upper() + ' LOR ' + def_insurance.upper() + ".docx",
+            DocxtoPDF2('C:/DocuLegal/LORs/Word/' + client_name.upper() + ' LOR ' + def_insurance.upper() + ".docx",
                       'C:/DocuLegal/LORs/PDF/' + client_name.upper() + ' LOR ' + def_insurance.upper() + ".pdf")
 
     def cancel_click(self):
