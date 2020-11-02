@@ -6,7 +6,7 @@ from datetime import datetime
 from docx import Document
 import comtypes.client
 from PyQt5 import QtCore, QtWidgets, QtGui
-from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QDialog, QPushButton, QWidget, QMainWindow
 from PyQt5.uic import loadUi
 
@@ -33,11 +33,16 @@ settings_path = (path + "/settings")
 lop_pl = (path + "\placeholders\LoP.docx")
 rr_pl = (path + "\placeholders\RR.docx")
 lor_pl = (path + "\placeholders\LoR.docx")
+user_fax_pl = re.compile("User Fax")
+user_email_pl = re.compile("User Email")
+current_balance_pl = re.compile("Current Balance")
+requested_balance_pl = re.compile("Requested Balance")
 
 os.chdir (path+r"\gui")
 
 
 #define replace_string , docxtopdf, and set values
+
 def DocxtoPDF2(in_file, out_file):
     word = comtypes.client.CreateObject('Word.Application')
     d = word.Documents.Open(in_file)
@@ -73,15 +78,25 @@ def replace_string(doc_obj, regex, replace):
                 replace_string(cell, regex, replace)
 
 def tabFocus(self):
-    self.plainTextEdit.setTabChangesFocus(True)
-    self.plainTextEdit_2.setTabChangesFocus(True)
-    self.plainTextEdit_3.setTabChangesFocus(True)
-    self.plainTextEdit_4.setTabChangesFocus(True)
-    self.plainTextEdit_5.setTabChangesFocus(True)
-    self.setTabOrder(self.plainTextEdit, self.plainTextEdit_2)
-    self.setTabOrder(self.plainTextEdit_2, self.plainTextEdit_3)
-    self.setTabOrder(self.plainTextEdit_3, self.plainTextEdit_4)
-    self.setTabOrder(self.plainTextEdit_4, self.plainTextEdit_5)
+    self.textEdit.setTabChangesFocus(True)
+    self.textEdit_2.setTabChangesFocus(True)
+    self.textEdit_3.setTabChangesFocus(True)
+    self.textEdit_4.setTabChangesFocus(True)
+    self.textEdit_5.setTabChangesFocus(True)
+    self.setTabOrder(self.textEdit, self.textEdit_2)
+    self.setTabOrder(self.textEdit_2, self.textEdit_3)
+    self.setTabOrder(self.textEdit_3, self.textEdit_4)
+    self.setTabOrder(self.textEdit_4, self.textEdit_5)
+
+#def tabFunc(self, x):
+#    self.textEdit.setTabChangesFocus(True)
+#    self.textEdit_2.setTabChangesFocus(True)
+#    self.setTabOrder(self.textEdit, self.textEdit_2)
+#    tabref=2
+#
+#    for tabref < x:
+#        self.setTabOrder(self.textEdit_, self.textEdit_)
+
 
 provider_int = 0
 
@@ -152,6 +167,7 @@ today_date = now.strftime('%m/%d/%Y')
 #Create classes
 
 
+
 #settings page
 
 class settings(QDialog):
@@ -163,32 +179,32 @@ class settings(QDialog):
         tabFocus(self)
 
         if os.path.exists(settings_path + "/user_name.txt"):
-            self.plainTextEdit.insertPlainText(user_name)
+            self.textEdit.insertPlainText(user_name)
 
         if os.path.exists(settings_path + "/user_email.txt"):
-            self.plainTextEdit_2.insertPlainText(user_email)
+            self.textEdit_2.insertPlainText(user_email)
 
         if os.path.exists(settings_path + "/user_phone.txt"):
-            self.plainTextEdit_3.insertPlainText(user_phone)
+            self.textEdit_3.insertPlainText(user_phone)
 
         if os.path.exists(settings_path + "/user_fax.txt"):
-            self.plainTextEdit_4.insertPlainText(user_fax)
+            self.textEdit_4.insertPlainText(user_fax)
 
         if os.path.exists(settings_path + "/output_path.txt"):
-            self.plainTextEdit_5.insertPlainText(output_path)
+            self.textEdit_5.insertPlainText(output_path)
 
     def savesettings(self):
 
-        user_name = self.plainTextEdit.toPlainText()
+        user_name = self.textEdit.toPlainText()
         self.writesettings("user_name", user_name)
 
-        user_email = self.plainTextEdit_2.toPlainText()
+        user_email = self.textEdit_2.toPlainText()
         self.writesettings("user_email", user_email)
 
-        user_phone = self.plainTextEdit_3.toPlainText()
+        user_phone = self.textEdit_3.toPlainText()
         self.writesettings("user_phone", user_phone)
 
-        user_fax = self.plainTextEdit_4.toPlainText()
+        user_fax = self.textEdit_4.toPlainText()
         self.writesettings("user_fax", user_fax)
 
 
@@ -230,25 +246,11 @@ class LOPpage(QDialog):
         loadUi("LOP.ui", self)
         self.pushButton.clicked.connect(self.create_click)
         self.pushButton_2.clicked.connect(self.cancel_click)
-        self.plainTextEdit.setTabChangesFocus(True)
-        self.plainTextEdit_2.setTabChangesFocus(True)
-        self.plainTextEdit_3.setTabChangesFocus(True)
-        self.plainTextEdit_4.setTabChangesFocus(True)
-        self.plainTextEdit_5.setTabChangesFocus(True)
-        self.plainTextEdit_6.setTabChangesFocus(True)
-        self.plainTextEdit_7.setTabChangesFocus(True)
-
-        self.setTabOrder(self.plainTextEdit, self.plainTextEdit_2)
-        self.setTabOrder(self.plainTextEdit_2, self.plainTextEdit_3)
-        self.setTabOrder(self.plainTextEdit_3, self.plainTextEdit_4)
-        self.setTabOrder(self.plainTextEdit_4, self.plainTextEdit_5)
-        self.setTabOrder(self.plainTextEdit_5, self.plainTextEdit_6)
-        self.setTabOrder(self.plainTextEdit_6, self.plainTextEdit_7)
 
     def create_click(self):
-        client_name = self.plainTextEdit.toPlainText()
-        doa = self.plainTextEdit_2.toPlainText()
-        attorney_name = self.plainTextEdit_3.toPlainText()
+        client_name = self.textEdit.toPlainText()
+        doa = self.textEdit_2.toPlainText()
+        attorney_name = self.textEdit_3.toPlainText()
         print(client_name + " "  + doa + " " + attorney_name)
 
     def cancel_click(self):
@@ -263,27 +265,12 @@ class RRpage(QDialog):
         loadUi("RR.ui", self)
         self.pushButton.clicked.connect(self.create_click)
         self.pushButton_2.clicked.connect(self.cancel_click)
-        self.plainTextEdit.setTabChangesFocus(True)
-        self.plainTextEdit_2.setTabChangesFocus(True)
-        self.plainTextEdit_3.setTabChangesFocus(True)
-        self.plainTextEdit_4.setTabChangesFocus(True)
-        self.plainTextEdit_5.setTabChangesFocus(True)
-        self.plainTextEdit_6.setTabChangesFocus(True)
-        self.plainTextEdit_7.setTabChangesFocus(True)
-        self.plainTextEdit_8.setTabChangesFocus(True)
 
-        self.setTabOrder(self.plainTextEdit, self.plainTextEdit_2)
-        self.setTabOrder(self.plainTextEdit_2, self.plainTextEdit_3)
-        self.setTabOrder(self.plainTextEdit_3, self.plainTextEdit_4)
-        self.setTabOrder(self.plainTextEdit_4, self.plainTextEdit_5)
-        self.setTabOrder(self.plainTextEdit_5, self.plainTextEdit_6)
-        self.setTabOrder(self.plainTextEdit_6, self.plainTextEdit_7)
-        self.setTabOrder(self.plainTextEdit_7, self.plainTextEdit_8)
 
     def create_click(self):
-        client_name = self.plainTextEdit.toPlainText()
-        doa = self.plainTextEdit_2.toPlainText()
-        attorney_name = self.plainTextEdit_3.toPlainText()
+        client_name = self.textEdit.toPlainText()
+        doa = self.textEdit_2.toPlainText()
+        attorney_name = self.textEdit_3.toPlainText()
 
 
     def cancel_click(self):
@@ -298,34 +285,18 @@ class LORpage(QDialog):
         loadUi("LOR.ui", self)
         self.pushButton.clicked.connect(self.create_click)
         self.pushButton_2.clicked.connect(self.cancel_click)
-        self.plainTextEdit.setTabChangesFocus(True)
-        self.plainTextEdit_2.setTabChangesFocus(True)
-        self.plainTextEdit_3.setTabChangesFocus(True)
-        self.plainTextEdit_4.setTabChangesFocus(True)
-        self.plainTextEdit_5.setTabChangesFocus(True)
-        self.plainTextEdit_6.setTabChangesFocus(True)
-        self.plainTextEdit_7.setTabChangesFocus(True)
-        self.plainTextEdit_8.setTabChangesFocus(True)
-        self.plainTextEdit_9.setTabChangesFocus(True)
-        self.setTabOrder(self.plainTextEdit, self.plainTextEdit_2)
-        self.setTabOrder(self.plainTextEdit_2, self.plainTextEdit_3)
-        self.setTabOrder(self.plainTextEdit_3, self.plainTextEdit_4)
-        self.setTabOrder(self.plainTextEdit_4, self.plainTextEdit_5)
-        self.setTabOrder(self.plainTextEdit_5, self.plainTextEdit_6)
-        self.setTabOrder(self.plainTextEdit_6, self.plainTextEdit_7)
-        self.setTabOrder(self.plainTextEdit_7, self.plainTextEdit_8)
-        self.setTabOrder(self.plainTextEdit_8, self.plainTextEdit_9)
+  
 
     def create_click(self):
-        client_name = self.plainTextEdit.toPlainText()
-        doa = self.plainTextEdit_2.toPlainText()
-        attorney_name = self.plainTextEdit_3.toPlainText()
-        claim_num = self.plainTextEdit_4.toPlainText()
-        def_insurance = self.plainTextEdit_5.toPlainText()
-        def_adjuster_name = self.plainTextEdit_6.toPlainText()
-        def_adjuster_address = self.plainTextEdit_7.toPlainText()
-        def_adjuster_csz = self.plainTextEdit_8.toPlainText()
-        def_adjuster_fax = self.plainTextEdit_9.toPlainText()
+        client_name = self.textEdit.toPlainText()
+        doa = self.textEdit_2.toPlainText()
+        attorney_name = self.textEdit_3.toPlainText()
+        claim_num = self.textEdit_4.toPlainText()
+        def_insurance = self.textEdit_5.toPlainText()
+        def_adjuster_name = self.textEdit_6.toPlainText()
+        def_adjuster_address = self.textEdit_7.toPlainText()
+        def_adjuster_csz = self.textEdit_8.toPlainText()
+        def_adjuster_fax = self.textEdit_9.toPlainText()
 
         doc = Document(lor_pl)
         if not os.path.exists('C:/DocuLegal/LORs/Word'):
@@ -356,7 +327,8 @@ class LORpage(QDialog):
                       'C:/DocuLegal/LORs/PDF/' + client_name.upper() + ' LOR ' + def_insurance.upper() + ".pdf")
 
     def cancel_click(self):
-        sys.exit()
+        mainpage.show()
+        self.hide()
 
 
 #Main page
@@ -373,6 +345,8 @@ class mainpage(QDialog):
         self.settings = settings()
         self.providerpage = providerpage()
         self.LORpage = LORpage()
+        self.LOPpage = LOPpage()
+        self.RRpage = RRpage()
 
 
     def movesettings(self):
@@ -385,13 +359,13 @@ class mainpage(QDialog):
         doc_type = "LOR"
 
     def moveLOP(self):
-        self.providerpage.show()
+        self.LOPpage.show()
         self.hide()
         global doc_type
         doc_type = "LOP"
 
     def moveRR(self):
-        self.providerpage.show()
+        self.RRpage.show()
         self.hide()
         global doc_type
         doc_type = "RR"

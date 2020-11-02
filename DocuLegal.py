@@ -45,7 +45,7 @@ def DocxtoPDF(inputFileName, outputFileName, formatType = 17):
     deck.Close()
     Word.Quit()
 
-
+print(DocxtoPDF)
 
 def replace_string(doc_obj, regex, replace):
     for p in doc_obj.paragraphs:
