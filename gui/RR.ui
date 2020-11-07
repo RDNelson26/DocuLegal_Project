@@ -16,19 +16,12 @@
     <height>300</height>
    </size>
   </property>
+  <property name="cursor">
+   <cursorShape>ArrowCursor</cursorShape>
+  </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QGraphicsView" name="graphicsView">
-   <property name="geometry">
-    <rect>
-     <x>420</x>
-     <y>10</y>
-     <width>311</width>
-     <height>141</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
@@ -330,8 +323,11 @@ p, li { white-space: pre-wrap; }
      <height>31</height>
     </rect>
    </property>
+   <property name="focusPolicy">
+    <enum>Qt::StrongFocus</enum>
+   </property>
    <property name="text">
-    <string>Cancel</string>
+    <string>Return</string>
    </property>
   </widget>
   <widget class="QWidget" name="verticalLayoutWidget">
@@ -353,6 +349,9 @@ p, li { white-space: pre-wrap; }
     </item>
     <item>
      <widget class="QComboBox" name="comboBox">
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
       <item>
        <property name="text">
         <string>Docx and PDF</string>
@@ -361,11 +360,6 @@ p, li { white-space: pre-wrap; }
       <item>
        <property name="text">
         <string>Only Docx</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Only PDF</string>
        </property>
       </item>
      </widget>
@@ -381,6 +375,9 @@ p, li { white-space: pre-wrap; }
      <height>31</height>
     </rect>
    </property>
+   <property name="focusPolicy">
+    <enum>Qt::StrongFocus</enum>
+   </property>
    <property name="styleSheet">
     <string notr="true">color: rgb(0, 0, 255);</string>
    </property>
@@ -388,13 +385,60 @@ p, li { white-space: pre-wrap; }
     <string>Create</string>
    </property>
   </widget>
+  <widget class="QLabel" name="label_11">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>0</y>
+     <width>311</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>../placeholders/DashnerLogo.jpg</pixmap>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_12">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>260</y>
+     <width>101</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;File Created&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_13">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>260</y>
+     <width>111</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Files Created&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
  </widget>
  <tabstops>
   <tabstop>textEdit</tabstop>
+  <tabstop>textEdit_2</tabstop>
+  <tabstop>textEdit_3</tabstop>
+  <tabstop>textEdit_4</tabstop>
+  <tabstop>textEdit_5</tabstop>
+  <tabstop>textEdit_6</tabstop>
+  <tabstop>textEdit_7</tabstop>
+  <tabstop>textEdit_8</tabstop>
   <tabstop>pushButton</tabstop>
   <tabstop>pushButton_2</tabstop>
-  <tabstop>graphicsView</tabstop>
-  <tabstop>comboBox</tabstop>
  </tabstops>
  <resources/>
  <connections/>

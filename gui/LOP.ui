@@ -38,6 +38,9 @@
     </item>
     <item>
      <widget class="QComboBox" name="comboBox">
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
       <item>
        <property name="text">
         <string>Docx and PDF</string>
@@ -340,20 +343,38 @@ p, li { white-space: pre-wrap; }
     </rect>
    </property>
    <property name="text">
-    <string>Cancel</string>
+    <string>Return</string>
    </property>
   </widget>
-  <widget class="QGraphicsView" name="graphicsView">
+  <widget class="QLabel" name="label_11">
    <property name="geometry">
     <rect>
      <x>420</x>
-     <y>10</y>
+     <y>0</y>
      <width>311</width>
      <height>141</height>
     </rect>
    </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>../placeholders/DashnerLogo.jpg</pixmap>
+   </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>textEdit</tabstop>
+  <tabstop>textEdit_2</tabstop>
+  <tabstop>textEdit_3</tabstop>
+  <tabstop>textEdit_4</tabstop>
+  <tabstop>textEdit_5</tabstop>
+  <tabstop>textEdit_6</tabstop>
+  <tabstop>textEdit_7</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>comboBox</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

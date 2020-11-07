@@ -43,23 +43,13 @@ os.chdir (path+r"\gui")
 
 #define replace_string , docxtopdf, and set values
 
-def DocxtoPDF2(in_file, out_file):
+def DocxtoPDF(in_file, out_file):
     word = comtypes.client.CreateObject('Word.Application')
     d = word.Documents.Open(in_file)
     d.SaveAs(out_file, FileFormat=17)
     d.Close()
     word.Quit()
 
-def DocxtoPDF(inputFileName, outputFileName, formatType = 17):
-    Word = comtypes.client.CreateObject("Word.Application")
-    Word.Visible = 1
-
-    if outputFileName[-3:] != 'pdf':
-        outputFileName = outputFileName + ".pdf"
-    deck = Word.Documents.Open(inputFileName)
-    deck.SaveAs(outputFileName, formatType)
-    deck.Close()
-    Word.Quit()
 
 
 
@@ -87,16 +77,6 @@ def tabFocus(self):
     self.setTabOrder(self.textEdit_2, self.textEdit_3)
     self.setTabOrder(self.textEdit_3, self.textEdit_4)
     self.setTabOrder(self.textEdit_4, self.textEdit_5)
-
-#def tabFunc(self, x):
-#    self.textEdit.setTabChangesFocus(True)
-#    self.textEdit_2.setTabChangesFocus(True)
-#    self.setTabOrder(self.textEdit, self.textEdit_2)
-#    tabref=2
-#
-#    for tabref < x:
-#        self.setTabOrder(self.textEdit_, self.textEdit_)
-
 
 provider_int = 0
 
@@ -128,18 +108,18 @@ def retrievesettings(settingsfile):
         settingsoutput.read()
 
 
-#Placeholder values
+#placeholder values
 
 #LoP and universal
 
-provider_email_PL = re.compile("Provider Email")
-provider_name_PL = re.compile("Provider Name")
-client_name_PL = re.compile("Client Name")
-doa_PL = re.compile("Date of Accident")
-today_date_PL = re.compile("Today Date")
-provider_address_PL = re.compile("Provider Address")
-lop_amount_PL = re.compile("LOP Amount")
-attorney_name_PL = re.compile("Attorney Name")
+provider_email_pl = re.compile("Provider Email")
+provider_name_pl = re.compile("Provider Name")
+client_name_pl = re.compile("Client Name")
+doa_pl = re.compile("Date of Accident")
+today_date_pl = re.compile("Today Date")
+provider_address_pl = re.compile("Provider Address")
+lop_amount_pl = re.compile("LOP Amount")
+attorney_name_pl = re.compile("Attorney Name")
 
 #LoR
 
@@ -176,6 +156,7 @@ class settings(QDialog):
         loadUi("settings.ui", self)
         self.pushButton.clicked.connect(self.savesettings)
         self.pushButton_2.clicked.connect(self.movemain)
+        self.setWindowTitle('Settings')
         tabFocus(self)
 
         if os.path.exists(settings_path + "/user_name.txt"):
@@ -192,6 +173,8 @@ class settings(QDialog):
 
         if os.path.exists(settings_path + "/output_path.txt"):
             self.textEdit_5.insertPlainText(output_path)
+        else:
+            self.textEdit_5.insertPlainText('C:/')
 
     def savesettings(self):
 
@@ -218,25 +201,6 @@ class settings(QDialog):
     def movemain(self):
         self.close()
 
-#provider number page
-
-class providerpage(QDialog):
-    def __init__(self):
-        super(providerpage, self).__init__()
-        loadUi("providernumber.ui", self)
-        self.pushButton.clicked.connect(self.move)
-        self.LOPpage = LOPpage()
-        self.RRpage = RRpage()
-
-    def move(self):
-        if  doc_type == "LOP":
-            self.LOPpage.show()
-            self.hide()
-
-        if doc_type == "RR":
-            self.RRpage.show()
-            self.hide()
-
 
 #LOP page
 
@@ -245,7 +209,8 @@ class LOPpage(QDialog):
         super(LOPpage, self).__init__()
         loadUi("LOP.ui", self)
         self.pushButton.clicked.connect(self.create_click)
-        self.pushButton_2.clicked.connect(self.cancel_click)
+        self.pushButton_2.clicked.connect(self.hide)
+        self.setWindowTitle('LOP')
 
     def create_click(self):
         client_name = self.textEdit.toPlainText()
@@ -253,8 +218,6 @@ class LOPpage(QDialog):
         attorney_name = self.textEdit_3.toPlainText()
         print(client_name + " "  + doa + " " + attorney_name)
 
-    def cancel_click(self):
-        sys.exit()
 
 
 #Reduction request page
@@ -264,17 +227,50 @@ class RRpage(QDialog):
         super(RRpage, self).__init__()
         loadUi("RR.ui", self)
         self.pushButton.clicked.connect(self.create_click)
-        self.pushButton_2.clicked.connect(self.cancel_click)
-
+        self.pushButton_2.clicked.connect(self.hide)
+        self.label_12.hide()
+        self.label_13.hide()
+        self.setWindowTitle('Reduction Request')
 
     def create_click(self):
         client_name = self.textEdit.toPlainText()
         doa = self.textEdit_2.toPlainText()
         attorney_name = self.textEdit_3.toPlainText()
+        provider_name = self.textEdit_4.toPlainText()
+        provider_email = self.textEdit_5.toPlainText()
+        provider_address = self.textEdit_6.toPlainText()
+        current_balance = self.textEdit_7.toPlainText()
+        requested_balance = self.textEdit_8.toPlainText()
+        doc = Document(rr_pl)
+
+        if not os.path.exists('C:/DocuLegal/Reduction Requests/Word'):
+            os.makedirs('C:/DocuLegal/Reduction Requests/Word')
+        if not os.path.exists('C:/DocuLegal/Reduction Requests/PDF'):
+            os.makedirs('C:/DocuLegal/Reduction Requests/PDF')
+
+        replace_string(doc, client_name_pl, client_name)
+        replace_string(doc, doa_pl, doa)
+        replace_string(doc, attorney_name_pl, attorney_name)
+        replace_string(doc, provider_name_pl, provider_name)
+        replace_string(doc, provider_email_pl, provider_email)
+        replace_string(doc, provider_address_pl, provider_address)
+        replace_string(doc, current_balance_pl, current_balance)
+        replace_string(doc, requested_balance_pl, requested_balance)
+        replace_string(doc, user_name_pl, user_name)
+        replace_string(doc, user_number_pl, user_phone)
+        replace_string(doc, today_date_pl, today_date)
+        print('check')
+        doc.save('C:/DocuLegal/Reduction Requests/Word/' + client_name.upper() + ' REDUCTION REQUEST ' + provider_name.upper() + ".docx")
+        print('check')
+        if str(self.comboBox.currentText()) == "Docx and PDF":
+            DocxtoPDF('/DocuLegal/Reduction Requests/Word/' + client_name.upper() + ' REDUCTION REQUEST ' + provider_name.upper() + ".docx",
+                      '/DocuLegal/Reduction Requests/PDF/' + client_name.upper() + ' REDUCTION REQUEST ' + provider_name.upper() + ".pdf")
+            self.label_13.show()
+
+        else:
+            self.label_12.show()
 
 
-    def cancel_click(self):
-        sys.exit()
 
 
 #LOR page
@@ -284,8 +280,8 @@ class LORpage(QDialog):
         super(LORpage, self).__init__()
         loadUi("LOR.ui", self)
         self.pushButton.clicked.connect(self.create_click)
-        self.pushButton_2.clicked.connect(self.cancel_click)
-  
+        self.pushButton_2.clicked.connect(self.hide)
+        self.setWindowTitle('LOR')
 
     def create_click(self):
         client_name = self.textEdit.toPlainText()
@@ -305,7 +301,8 @@ class LORpage(QDialog):
         if not os.path.exists('C:/DocuLegal/LORs/PDF'):
             os.makedirs('C:/DocuLegal/LORs/PDF')
 
-        replace_string(doc, client_name_PL, client_name)
+        replace_string(doc, client_name_pl, client_name)
+        replace_string(doc, doa_pl, doa)
         replace_string(doc, def_insurance_pl, def_insurance)
         replace_string(doc, claim_num_pl, claim_num)
         replace_string(doc, def_adjuster_name_pl, def_adjuster_name)
@@ -314,22 +311,39 @@ class LORpage(QDialog):
         replace_string(doc, def_adjuster_fax_pl, def_adjuster_fax)
         replace_string(doc, user_name_pl, user_name)
         replace_string(doc, user_number_pl, user_phone)
-        replace_string(doc, attorney_name_PL, attorney_name)
+        replace_string(doc, attorney_name_pl, attorney_name)
         replace_string(doc, def_adjuster_name_pl, def_adjuster_name)
-        replace_string(doc, today_date_PL, today_date)
+        replace_string(doc, today_date_pl, today_date)
 
 
         doc.save('C:/DocuLegal/LORs/Word/' + client_name.upper() + ' LOR ' + def_insurance.upper() + ".docx")
 
         if str(self.comboBox.currentText()) == "Docx and PDF":
 
-            DocxtoPDF2('C:/DocuLegal/LORs/Word/' + client_name.upper() + ' LOR ' + def_insurance.upper() + ".docx",
+            DocxtoPDF('C:/DocuLegal/LORs/Word/' + client_name.upper() + ' LOR ' + def_insurance.upper() + ".docx",
                       'C:/DocuLegal/LORs/PDF/' + client_name.upper() + ' LOR ' + def_insurance.upper() + ".pdf")
 
-    def cancel_click(self):
-        mainpage.show()
-        self.hide()
 
+# MRBR page
+
+class MRBRpage(QDialog):
+    def __init__(self):
+        super(MRBRpage, self).__init__()
+        loadUi("MRBR.ui", self)
+        self.pushButton.clicked.connect(self.create_click)
+        self.pushButton_2.clicked.connect(self.hide)
+        self.setWindowTitle('MRBR')
+
+
+# MRBR Hospital Page
+
+class MRBRHpage(QDialog):
+    def __init__(self):
+        super(MRBRHpage, self).__init__()
+        loadUi("MRBRH.ui", self)
+        self.pushButton.clicked.connect(self.create_click)
+        self.pushButton_2.clicked.connect(self.hide)
+        self.setWindowTitle('MRBR - Hospital')
 
 #Main page
 
@@ -343,11 +357,17 @@ class mainpage(QDialog):
         self.pushButton_3.clicked.connect(self.moveRR)
         self.pushButton_4.clicked.connect(self.movesettings)
         self.settings = settings()
-        self.providerpage = providerpage()
         self.LORpage = LORpage()
         self.LOPpage = LOPpage()
         self.RRpage = RRpage()
-
+        #self.MRBRpage = MRBRpage()
+        #self.MRBRHpage = MRBRHpage()
+        self.LORpage.pushButton_2.clicked.connect(self.show)
+        self.LOPpage.pushButton_2.clicked.connect(self.show)
+        self.RRpage.pushButton_2.clicked.connect(self.show)
+        #self.MRBRpage.pushButton_2.clicked.connect(self.show)
+        #self.MRBRHpage.pushButton_2.clicked.connect(self.show)
+        self.setWindowTitle('DocuLegal')
 
     def movesettings(self):
         self.settings.show()
@@ -369,6 +389,9 @@ class mainpage(QDialog):
         self.hide()
         global doc_type
         doc_type = "RR"
+
+
+
 
 if os.path.exists(settings_path + "/user_name.txt") and os.path.exists(settings_path + "/user_email.txt") and os.path.exists(settings_path + "/user_phone.txt") and os.path.exists(settings_path + "/user_email.txt"):
     app = QApplication(sys.argv)
